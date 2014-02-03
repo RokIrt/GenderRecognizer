@@ -2,7 +2,7 @@
 #include "GenderRecognizer.h"
 using namespace cv;
 
-int main3 (int argc, const char * argv[])
+int main (int argc, const char * argv[])
 {
 			if (argc == 2){
 				Mat img=imread(argv[1]);
