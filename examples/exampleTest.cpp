@@ -34,7 +34,7 @@ int main (int argc, const char * argv[])
 	string fn_csv="";
     if (argc < 2) {
         cout << "usage: " << argv[0] << " <csv.ext> <output_folder> " << endl;
-        fn_csv = "data1/data.ext";
+        fn_csv = "data/testimages/data.ext";
 	}else{
 		fn_csv = string(argv[1]);
 	}

@@ -1,5 +1,5 @@
 #include <opencv2/opencv.hpp>
-#include "GenderRecognizer.h"
+#include "../GenderRecognizer.h"
 using namespace cv;
 
 int main (int argc, const char * argv[])
