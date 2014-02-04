@@ -5,12 +5,10 @@ using namespace cv;
 
 int main (int argc, const char * argv[])
 {
-	if (argc == 2){
+	if (argc == 2)
 		Mat img=imread(argv[1]);
-	}
-	Mat img  = imread("data\\test1_.jpg");
+	else
+		Mat img  = imread("data\\face.jpg");
 	GenderRecognizer GR;
-	double confidence;
-	GR.predict(img);
-	return 1;
+	int gender=GR.predict(img);	
 }

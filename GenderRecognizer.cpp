@@ -37,11 +37,27 @@ int GenderRecognizer::predict(Mat img, double &confidence)
 	int theType = img.type();
 	int predictedLabel = -1;
     double conf = 0.0;
+	double maxConf=9999;
+	Mat tmpImg=img;
+	int tmpGender;
 	try{
- 			model->predict(img, predictedLabel, conf);
-	 }catch( cv::Exception& e ){
-	const char* err_msg = e.what();
-	std::cout << "exception caught: " << err_msg << std::endl;
+			for(int i=-5; i<6; i++)
+				for(int j=-2; j<6; j++){
+					Point delta = Point((i), (j));
+					cv::Mat M = (cv::Mat_<float>(2, 3) << 1,  0,  delta.x, 0,  1,  delta.y);
+					warpAffine(img,img,M,img.size());
+					model->predict(tmpImg, predictedLabel, conf);
+					if(maxConf>conf) {
+						tmpGender=predictedLabel;
+						maxConf=conf;
+					}
+			}
+			conf=maxConf;
+			predictedLabel=tmpGender;
+	
+	}catch( cv::Exception& e ){
+		const char* err_msg = e.what();
+		std::cout << "exception caught: " << err_msg << std::endl;
 	}
 	confidence=conf;
 	return predictedLabel;
@@ -50,8 +66,7 @@ int GenderRecognizer::predict(Mat img, double &confidence)
 
 int GenderRecognizer::align()
 {
-	FaceAlignment faceAlignment(img);
-	faceAlignment.alignFace();
+	faceAlignment.alignFace(img);
 	return 1;
 	
 }
@@ -68,7 +83,7 @@ int GenderRecognizer::update(Mat img)
 //
 // 
 // SUM[gender/confidence]/n
-// gender={-1,1}, n:number of sample
+// gender={-1,1;, n:number of sample
 // -1 male
 // +1 female
 //
@@ -84,9 +99,10 @@ int GenderRecognizer::calculateConfidence(){
 			confidence+=gender*conf;
 		}
 		confidence=confidence/gender_confidence.size();
-		if(confidence>0) confidence=1;  //female if negative
-		else confidence=0; //male
-		return confidence;
+		int gender;
+		if(confidence>0) gender=1;  //female 
+		else gender=0; //male if negative
+		return gender;
 	}
 
 }

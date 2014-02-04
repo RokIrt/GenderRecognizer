@@ -1,5 +1,5 @@
 #include <opencv2/opencv.hpp>
-#include "flandmark_detector.h"
+#include "lib/flandmark_detector.h"
 
 using namespace std;
 using namespace cv;
@@ -7,9 +7,9 @@ using namespace cv;
 class FaceAlignment
 {
 public:
-	FaceAlignment(Mat &image);
+	FaceAlignment();
 	~FaceAlignment(void);
-	Mat alignFace(Point righteye=Point(41,42));
+	Mat alignFace( Mat &image, Point righteye=Point(40,40));
 	Mat img;
 private:
 	vector<Point> findLandmarks(); //returns center coordinates(x,y) for lefteye, righteye, mouth respectively

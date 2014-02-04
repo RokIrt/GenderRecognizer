@@ -1,10 +1,9 @@
 #include "FaceAlignment.h"
 
 
-FaceAlignment::FaceAlignment(Mat &image)
+FaceAlignment::FaceAlignment()
 {
-	FaceAlignment::img=image;
-	alignFace();
+	
 }
 
 
@@ -13,10 +12,11 @@ FaceAlignment::~FaceAlignment(void)
 }
 
 
-Mat FaceAlignment::alignFace(Point righteye)
+Mat FaceAlignment::alignFace(Mat &image,Point righteye)
 {
   try{
-	vector<Point> features=findLandmarks();
+	 FaceAlignment::img=image;
+	 vector<Point> features=findLandmarks();
      if(features.size()==3){
 		///affine transform of image
 		float angle;
