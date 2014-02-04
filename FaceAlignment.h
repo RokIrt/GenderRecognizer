@@ -9,7 +9,7 @@ class FaceAlignment
 public:
 	FaceAlignment();
 	~FaceAlignment(void);
-	Mat alignFace( Mat &image, Point righteye=Point(40,40));
+	Mat alignFace( Mat &image, Point righteye=Point(41,43));
 	Mat img;
 private:
 	vector<Point> findLandmarks(); //returns center coordinates(x,y) for lefteye, righteye, mouth respectively

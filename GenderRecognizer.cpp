@@ -21,16 +21,19 @@ int GenderRecognizer::predict(Mat img){
 
 int GenderRecognizer::predict(Mat img, double &confidence)
 {
+	if(img.channels()!=1){
+		cvtColor( img, img, CV_BGR2GRAY );
+	}
 	GenderRecognizer::img=img;
 	int size=img.size().height;
 	if(size==0) return 0;
-	if((img.rows<129)||(img.cols<111)){
-		resize(img,img,Size(108,125));
+	if((img.rows<116)||(img.cols<116)){
+		resize(img,img,Size(115,115));
 		align();
 	}else{
 			align();
-			img=img(Rect(0,0,110,128));
-			resize(img,img,Size(108,125));
+			img=img(Rect(0,0,116,116));
+			resize(img,img,Size(115,115));
 			
 			
 	}
@@ -41,8 +44,8 @@ int GenderRecognizer::predict(Mat img, double &confidence)
 	Mat tmpImg=img;
 	int tmpGender;
 	try{
-			for(int i=-5; i<6; i++)
-				for(int j=-2; j<6; j++){
+			for(int i=-1; i<2; i++)
+				for(int j=-1; j<2; j++){
 					Point delta = Point((i), (j));
 					cv::Mat M = (cv::Mat_<float>(2, 3) << 1,  0,  delta.x, 0,  1,  delta.y);
 					warpAffine(img,img,M,img.size());
@@ -54,6 +57,7 @@ int GenderRecognizer::predict(Mat img, double &confidence)
 			}
 			conf=maxConf;
 			predictedLabel=tmpGender;
+		
 	
 	}catch( cv::Exception& e ){
 		const char* err_msg = e.what();
