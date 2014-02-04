@@ -14,8 +14,8 @@ GenderRecognizer::~GenderRecognizer(void)
 }
 
 int GenderRecognizer::predict(Mat img){
-		double conf=0;
-		return predict(img, conf);
+	double conf=0;
+	return predict(img, conf);
 }
 
 
@@ -31,11 +31,9 @@ int GenderRecognizer::predict(Mat img, double &confidence)
 		resize(img,img,Size(115,115));
 		align();
 	}else{
-			align();
-			img=img(Rect(0,0,116,116));
-			resize(img,img,Size(115,115));
-			
-			
+		align();
+		img=img(Rect(0,0,116,116));
+		resize(img,img,Size(115,115));
 	}
 	int theType = img.type();
 	int predictedLabel = -1;
@@ -45,7 +43,7 @@ int GenderRecognizer::predict(Mat img, double &confidence)
 	int tmpGender;
 	try{
 			for(int i=-1; i<2; i++)
-				for(int j=-1; j<2; j++){
+				for(int j=-2; j<3; j++){
 					Point delta = Point((i), (j));
 					cv::Mat M = (cv::Mat_<float>(2, 3) << 1,  0,  delta.x, 0,  1,  delta.y);
 					warpAffine(img,img,M,img.size());
