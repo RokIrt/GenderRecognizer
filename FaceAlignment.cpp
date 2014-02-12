@@ -3,6 +3,7 @@
 
 FaceAlignment::FaceAlignment()
 {
+	model = flandmark_init("data\\flandmark_model.dat");
 	
 }
 
@@ -60,7 +61,6 @@ vector<Point> FaceAlignment::findLandmarks()
 	lefteye=cvPoint(0,0);
 	righteye=cvPoint(0,0);
 	mouth=cvPoint(0,0);
-	FLANDMARK_Model * model = flandmark_init("data\\flandmark_model.dat");
 	double * d_landmarks = (double*)malloc(2*model->data.options.M*sizeof(double));
     if(!flandmark_detect(img_grayscale, bbox, model, d_landmarks)){
 		std::vector<cv::Point> pts;

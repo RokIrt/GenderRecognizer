@@ -4,7 +4,7 @@
 GenderRecognizer::GenderRecognizer(void)
 {
 	model = createFisherFaceRecognizer();
-	model->load("data\\gender_classifier.xml");
+	model->load("data\\gender_classifier_25imgs.xml");
 	
 }
 
@@ -27,14 +27,11 @@ int GenderRecognizer::predict(Mat img, double &confidence)
 	GenderRecognizer::img=img;
 	int size=img.size().height;
 	if(size==0) return 0;
-	if((img.rows<116)||(img.cols<116)){
-		resize(img,img,Size(115,115));
-		align();
-	}else{
-		align();
-		img=img(Rect(0,0,116,116));
-		resize(img,img,Size(115,115));
-	}
+
+	resize(img,img,Size(120,120));
+	align();
+	//img=img(Rect(0,0,116,116));
+	//resize(img,img,Size(115,115));
 	int theType = img.type();
 	int predictedLabel = -1;
     double conf = 0.0;
@@ -42,8 +39,8 @@ int GenderRecognizer::predict(Mat img, double &confidence)
 	Mat tmpImg=img;
 	int tmpGender;
 	try{
-			for(int i=-1; i<2; i++)
-				for(int j=-2; j<3; j++){
+			for(int i=0; i<1; i++)
+				for(int j=0; j<1; j++){
 					Point delta = Point((i), (j));
 					cv::Mat M = (cv::Mat_<float>(2, 3) << 1,  0,  delta.x, 0,  1,  delta.y);
 					warpAffine(img,img,M,img.size());

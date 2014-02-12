@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "../GenderRecognizer.h"
+#include "../SmileRecognizer.h"
 
 
 using namespace std;
@@ -21,7 +21,7 @@ static void read_csv(const string& filename, vector<Mat>& images, vector<int>& l
         getline(liness, path, separator);
         getline(liness, classlabel);
         if(!path.empty() && !classlabel.empty()) {
-            images.push_back(imread(path, 0));
+            images.push_back(imread("data\\testimages\\"+path, 0));
             labels.push_back(atoi(classlabel.c_str()));
         }
     }
@@ -34,7 +34,7 @@ int main (int argc, const char * argv[])
 	string fn_csv="";
     if (argc < 2) {
         cout << "usage: " << argv[0] << " <csv.ext> <output_folder> " << endl;
-        fn_csv = "data/testimages/data.ext";
+        fn_csv = "data\\testimages\\all.ext";
 	}else{
 		fn_csv = string(argv[1]);
 	}
@@ -50,27 +50,27 @@ int main (int argc, const char * argv[])
     }
 	GenderRecognizer GR;
 	int counter =0;
+	
 	for(int i=0;i<testimages.size();i++)
 	{
 		double conf=0;
-		int prediction=GR.predict(testimages[i],conf);
-		if(prediction==testlabels[i]){
-			counter++;
-			string result_message = format("true. confidence= %f %i", conf, i);
-			cout << result_message << endl;
-		}else{
-			string result_message = format("FALSE. CONFIDENCE= %f", conf);
-			cout << result_message << endl;
-			string msg=format("wrong images %i",i);
-			if(testimages[i].cols>0)
-				imshow(msg,testimages[i]);
-			waitKey(10);
+		if(testimages[i].cols>0){
+			int prediction=GR.predict(testimages[i],conf);
+	
+			if(prediction==testlabels[i]){
+				counter++;
+				string result_message = format("true. confidence= %f %i", conf, i);
+				cout << result_message << endl;
+			}else{
+				string result_message = format("FALSE. CONFIDENCE= %f", conf);
+				cout << result_message << endl;
+			}
 		}
 	}
 	float ratio=float(counter)/float(testimages.size());
 
 	string result_message = format("true= %d, all=%d, ratio is= %f", counter,testlabels.size(),ratio);
     cout << result_message << endl;
-	waitKey(0);
+ 	waitKey(0);
 }
 

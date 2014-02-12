@@ -9,9 +9,10 @@ class FaceAlignment
 public:
 	FaceAlignment();
 	~FaceAlignment(void);
-	Mat alignFace( Mat &image, Point righteye=Point(41,43));
+	Mat alignFace( Mat &image, Point righteye=Point(40,51));
 	Mat img;
 private:
+	FLANDMARK_Model * model;
 	vector<Point> findLandmarks(); //returns center coordinates(x,y) for lefteye, righteye, mouth respectively
 	struct PointsYASC{
     bool operator() (cv::Point pt1, cv::Point pt2) { return (pt1.y < pt2.y);}
