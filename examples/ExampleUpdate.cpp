@@ -4,10 +4,11 @@ using namespace cv;
 
 int main (int argc, const char * argv[])
 {
+	Mat img;
 	if (argc == 2){
-		Mat img=imread(argv[1]);
+		img=imread(argv[1]);
 	}else
-		Mat img  = imread("data\\face.jpg");
+		img  = imread("data\\face.jpg");
 	GenderRecognizer GR;
 	for(int i=0;i<10;i++){
 		//double confidence;

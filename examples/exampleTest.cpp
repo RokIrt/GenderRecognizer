@@ -3,8 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "../SmileRecognizer.h"
-
+#include "../GenderRecognizer.h"
 
 using namespace std;
 using namespace cv;
