@@ -8,8 +8,9 @@ It uses FaceRecognizer class and Facial landmark locator library (http://cmp.fel
    * An example using the GenderRecognizer class can be found at /samples/exampleSimple.cpp
 
   // Just create GR class
-  GenderRecognizer GR;
   // and call .predict(img) function with CROPED FACE IMAGE as input (optimized for Viola-Jones output) 
+  
+  GenderRecognizer GR;
   int gender=GR.predict(img);	
 
 
@@ -39,10 +40,10 @@ public:
  FaceAlignment
 ------------------
 
-
 class FaceAlignment{
 
 public:
+
 	//offsets and rotates face, so that eyes are horisontal aligned and right eye is at coordinate "righteye"
 	//input: croped face image and x,y of right eye
 	// returns align face image
