@@ -19,7 +19,9 @@ It uses FaceRecognizer class and Facial landmark locator library (http://cmp.fel
 ------------------
 
 class GenderRecognizer{
+
 public:
+
 	// Renturns predicted gender (0=male,1=female)
 	// Takes an input as CROPED FACE IMAGE (optimized for Viola-Jones output) 
 	int predict(Mat inputImage);
@@ -40,8 +42,8 @@ public:
 
 
 class FaceAlignment{
+
 public:
-{
 	//offsets and rotates face, so that eyes are horisontal aligned and right eye is at coordinate "righteye"
 	//input: croped face image and x,y of right eye
 	// returns align face image
