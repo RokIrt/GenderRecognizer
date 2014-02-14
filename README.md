@@ -1,17 +1,15 @@
 GenderRecognizer
 ==============
-This is a gender recognition library for OpenCV written in C++.
+This is a gender recognition library for OpenCV 2.4 written in C++.
 It uses FaceRecognizer class and Facial landmark locator library (http://cmp.felk.cvut.cz/~uricamic/flandmark/).
 
 -------------------
 .. Sample code::
    * An example using the GenderRecognizer class can be found at /samples/exampleSimple.cpp
-
-  // Just create GR class
-  // and call .predict(img) function with CROPED FACE IMAGE as input (optimized for Viola-Jones output) 
   
-  GenderRecognizer GR;
-  int gender=GR.predict(img);	
+  * genderRecognizer GR; //create genderRecognizer instance
+  * int gender=GR.predict(img);	// and call .predict(img) function with CROPED FACE IMAGE as input (optimized for Viola-Jones output) 
+  
 
 
 ------------------
