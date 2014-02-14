@@ -7,11 +7,10 @@ It uses FaceRecognizer class and Facial landmark locator library (http://cmp.fel
 .. Sample code::
    * An example using the GenderRecognizer class can be found at /samples/exampleSimple.cpp
 
-  //// Just create GR class
-	//// and call .predict(img) function with CROPED FACE IMAGE as input (optimized for Viola-Jones output) 
-	
-	GenderRecognizer GR;
-	int gender=GR.predict(img);	
+  // Just create GR class
+  GenderRecognizer GR;
+  // and call .predict(img) function with CROPED FACE IMAGE as input (optimized for Viola-Jones output) 
+  int gender=GR.predict(img);	
 
 
 ------------------
