@@ -5,7 +5,7 @@ It uses FaceRecognizer class and Facial landmark locator library (http://cmp.fel
 
 -------------------
 .. Sample code::
-   * An example using the GenderRecognizer class can be found at /samples/exampleSimple.cpp
+   * An example using the GenderRecognizer class can be found at /examples/exampleSimple.cpp
   
   * genderRecognizer GR; //create genderRecognizer instance
   * int gender=GR.predict(img);	// and call .predict(img) function with CROPED FACE IMAGE as input (optimized for Viola-Jones output) 
@@ -28,7 +28,7 @@ public:
 	// Takes an input as croped face image
 	int predict(Mat inputImage,double confidence);
 	
-	// Prediction is updated every time with prediction weighted with confidence: SUM[predicted/confidence]
+	// Prediction is updated every time with prediction weighted with confidence: SUM[predicted/confidence]/N
 	// Renturns predicted gender (0=male,1=female) and confidence (e.g.distance) of prediction
 	int update(Mat inputImage);
 	int update(Mat inputImage,double confidence)
